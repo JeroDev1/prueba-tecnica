@@ -1,0 +1,20 @@
+/* #root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+} */
+
+
+
+.div-product {
+  background-color: red;
+  width: 200px;
+}
+
+.div-general {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: green;
+  width: 100%;
+}
