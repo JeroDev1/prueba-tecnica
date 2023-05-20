@@ -25,21 +25,45 @@ export const Carrousel = () => {
   }, []);
 
   const calculateStars = (tags) => {
-    // Cálculo de estrellas omitido por brevedad
+    const tagNumbers = tags
+      .filter((tag) => !isNaN(tag))
+      .map((tag) => Number(tag));
+    const sum = tagNumbers.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    const average = sum / tagNumbers.length;
+  
+    let stars = 0;
+  
+    if (average >= 0 && average < 100) {
+      stars = 1;
+    } else if (average >= 100 && average < 200) {
+      stars = 2;
+    } else if (average >= 200 && average < 300) {
+      stars = 3;
+    } else if (average >= 300 && average < 400) {
+      stars = 4;
+    } else {
+      stars = 5;
+    }
+  
+    return stars;
   };
 
   const renderStars = (numStars, category) => {
-    // Renderización de estrellas omitida por brevedad
-  };
-
-  const getCardWidth = () => {
-    if (isMobile) {
-      return '100%';
-    } else if (isTablet) {
-      return '33%';
-    } else {
-      return '20%';
+    const stars = [];
+  
+    for (let i = 0; i < numStars; i++) {
+      stars.push(<StarIcon key={i} color='#ffdf00' />);
     }
+  
+    return (
+      <>
+        <Box>{stars}</Box>
+        <Text>{category}</Text>
+      </>
+    );
   };
 
   return (
@@ -56,7 +80,7 @@ export const Carrousel = () => {
       >
         {products.map((product) => (
           <div key={product.id} className='div-product'>
-            <Card w={!isMobile ? '300px' : '100%'} h='580px'>
+            <Card w={!isMobile ? '300px' : '100%'} h='480px'>
               <Image src={product.featuredImage.url} alt={product.title} maxWidth='100%' />
 
               <CardBody>
